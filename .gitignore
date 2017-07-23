@@ -1,5 +1,14 @@
+*.iml
 out/
 gen/
 /res
 /bin
-/*.iml
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+/captures
+.DS_Store
+.externalNativeBuild
+.gradle
+

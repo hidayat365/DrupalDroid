@@ -5,11 +5,10 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 import org.json.JSONObject;
-
 import java.io.*;
 
 public class ServicesClient {
@@ -67,15 +66,14 @@ public class ServicesClient {
 
     public void post(String url, JSONObject params, AsyncHttpResponseHandler responseHandler) {
         this.setHeaders();
-        StringEntity se = null;
+        StringEntity se;
         try {
             se = new StringEntity(params.toString(), HTTP.UTF_8);
-        } catch (UnsupportedEncodingException e) {
+            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            client.post(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-
-        client.post(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
     }
 
     public void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
@@ -85,15 +83,14 @@ public class ServicesClient {
 
     public void put(String url, JSONObject params, AsyncHttpResponseHandler responseHandler) {
         this.setHeaders();
-        StringEntity se = null;
+        StringEntity se;
         try {
             se = new StringEntity(params.toString(), HTTP.UTF_8);
-        } catch (UnsupportedEncodingException e) {
+            se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            client.put(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-
-        client.put(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
     }
     
     public void getToken(AsyncHttpResponseHandler responseHandler) {

@@ -31,7 +31,6 @@ apply plugin: 'com.android.library'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // Add other library dependencies here (see the next step)
-    compile files('libs/httpclient-4.4.1.2.jar')
 }
 
 /**

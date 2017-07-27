@@ -5,6 +5,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
+
+import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
@@ -26,17 +28,28 @@ public class ServicesClient {
     }
 
     public String getToken() {
-      return token;
+        return token;
     }
 
     public void setToken(String token) {
-      this.token = token;
+        this.token = token;
     }
 
     private void setHeaders() {
-      if (!token.equals("")) {
-        client.addHeader("X-CSRF-Token", token);
-      }
+        if (!token.equals("")) {
+            client.addHeader("X-CSRF-Token", token);
+        } else {
+            getToken(new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    String result = new String(bytes);
+                    setToken(result);
+                }
+                @Override
+                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                }
+            });
+        }
     }
 
     public void setCookieStore(PersistentCookieStore cookieStore) {

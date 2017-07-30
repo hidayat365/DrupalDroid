@@ -56,7 +56,7 @@ public class ServicesClient {
 
     private void setHeaders() {
         // token
-        if (!token.equals("")) {
+        if (!token.isEmpty()) {
             client.addHeader("X-CSRF-Token", token);
         } else {
             getToken(new AsyncHttpResponseHandler() {
@@ -70,6 +70,10 @@ public class ServicesClient {
                     token = "";
                 }
             });
+        }
+        // session
+        if (!sessionId.isEmpty() && !sessionName.isEmpty()) {
+            client.addHeader("Cookie", sessionName + "=" + sessionId);
         }
     }
 

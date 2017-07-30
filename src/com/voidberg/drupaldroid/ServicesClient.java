@@ -18,6 +18,9 @@ public class ServicesClient {
     private String rootUrl;
     private String token;
 
+    private String sessionId;
+    private String sessionName;
+
     public static AsyncHttpClient client = new AsyncHttpClient();
 
     public ServicesClient(String server, String base) {
@@ -30,12 +33,29 @@ public class ServicesClient {
     public String getToken() {
         return token;
     }
-
+    public void getToken(AsyncHttpResponseHandler responseHandler) {
+        this.getRoot("services/session/token", new RequestParams(), responseHandler);
+    }
     public void setToken(String token) {
         this.token = token;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionName() {
+        return sessionName;
+    }
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
     private void setHeaders() {
+        // token
         if (!token.equals("")) {
             client.addHeader("X-CSRF-Token", token);
         } else {
@@ -47,6 +67,7 @@ public class ServicesClient {
                 }
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                    token = "";
                 }
             });
         }
@@ -106,7 +127,4 @@ public class ServicesClient {
         }
     }
     
-    public void getToken(AsyncHttpResponseHandler responseHandler) {
-      this.getRoot("services/session/token", new RequestParams(), responseHandler);
-    }
 }

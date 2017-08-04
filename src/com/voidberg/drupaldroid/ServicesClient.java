@@ -27,6 +27,8 @@ public class ServicesClient {
         this.url = server + '/' + base + '/';
         this.rootUrl = server + '/';
         this.token = "";
+        this.sessionId = "";
+        this.sessionName = "";
         client.setTimeout(60000);
     }
 

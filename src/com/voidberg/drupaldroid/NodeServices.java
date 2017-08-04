@@ -15,4 +15,11 @@ public class NodeServices {
     public void retrieve(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get("node/" + url, params, responseHandler);
     }
+
+    public void create(RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.post("node", params, responseHandler);
+    }
+    public void create(JSONObject params, AsyncHttpResponseHandler responseHandler) {
+        client.post("node", params, responseHandler);
+    }
 }

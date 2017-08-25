@@ -61,6 +61,7 @@ public class ServicesClient {
         if (!token.isEmpty()) {
             client.addHeader("X-CSRF-Token", token);
         } else {
+            /*
             getToken(new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -72,6 +73,7 @@ public class ServicesClient {
                     token = "";
                 }
             });
+            */
         }
         // session
         if (!sessionId.isEmpty() && !sessionName.isEmpty()) {
@@ -92,10 +94,12 @@ public class ServicesClient {
     }
 
     public void getRoot(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-      client.get(getAbsoluteRootUrl(url), params, responseHandler);
+        this.setHeaders();
+        client.get(getAbsoluteRootUrl(url), params, responseHandler);
     }
 
     public void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        this.setHeaders();
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 

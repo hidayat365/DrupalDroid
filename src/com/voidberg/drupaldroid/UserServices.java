@@ -1,6 +1,8 @@
 package com.voidberg.drupaldroid;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,5 +26,12 @@ public class UserServices {
 
     public void logout(AsyncHttpResponseHandler responseHandler) {
         client.post("user/logout", new JSONObject(), responseHandler);
+    }
+
+    public void retrieve(String uid, AsyncHttpResponseHandler responseHandler) {
+        client.get("user/"+uid, new RequestParams(), responseHandler);
+    }
+    public void retrieve(String uid, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.get("user/"+uid, params, responseHandler);
     }
 }

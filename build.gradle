@@ -13,7 +13,7 @@ buildscript {
     * of the Gradle plugin for the buildscript.
     */
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.0'
     }
 }
 
@@ -40,7 +40,6 @@ dependencies {
  */
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
@@ -79,4 +78,5 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
      }
+    buildToolsVersion '26.0.2'
 }

@@ -12,7 +12,11 @@ public class ViewsServices {
         client = c;
     }
 
+    public void index(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.get(url, params, responseHandler);
+    }
     public void retrieve(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get("views/" + url, params, responseHandler);
     }
+
 }

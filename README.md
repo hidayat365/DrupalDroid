@@ -96,8 +96,8 @@ Call system.connect and check if we are logged in:
             boolean loggedin = false;
             try {
                 JSONObject user = response.getJSONObject("user");
-                int uid = user.getInt("uid");
-                if (uid > 0) {
+                int nid = user.getInt("nid");
+                if (nid > 0) {
                     loggedin = true;
                 }
                 else {

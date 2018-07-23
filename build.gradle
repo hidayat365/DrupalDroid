@@ -33,6 +33,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Add other library dependencies here (see the next step)
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
 }
 
 /**

@@ -32,6 +32,7 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Add other library dependencies here (see the next step)
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 /**
@@ -47,6 +48,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     /**
@@ -81,3 +83,4 @@ android {
 repositories {
     google()
 }
+

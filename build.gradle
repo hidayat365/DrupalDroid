@@ -5,8 +5,8 @@ buildscript {
     * jcenter repository.
     */
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 
    /**
@@ -83,5 +83,6 @@ android {
 }
 repositories {
     google()
+    jcenter()
 }
 

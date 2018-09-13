@@ -12,6 +12,7 @@ import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
 import org.json.JSONObject;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class ServicesClient {
     private String url;
@@ -112,7 +113,7 @@ public class ServicesClient {
         this.setHeaders();
         StringEntity se;
         try {
-            se = new StringEntity(params.toString(), HTTP.UTF_8);
+            se = new StringEntity(params.toString(), StandardCharsets.UTF_8);
             se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
         } catch (Exception e) {

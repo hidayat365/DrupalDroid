@@ -14,7 +14,7 @@ buildscript {
     * of the Gradle plugin for the buildscript.
     */
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
     }
 }
 
@@ -32,8 +32,9 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Add other library dependencies here (see the next step)
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'cz.msebera.android:httpclient:4.4.1.2'
     implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 /**

@@ -34,4 +34,11 @@ public class UserServices {
     public void retrieve(String uid, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get("user/"+uid, params, responseHandler);
     }
+
+    public void update(String uid, AsyncHttpResponseHandler responseHandler) {
+        client.put("user/"+uid, new RequestParams(), responseHandler);
+    }
+    public void update(String uid, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.put("user/"+uid, params, responseHandler);
+    }
 }

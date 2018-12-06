@@ -41,4 +41,7 @@ public class UserServices {
     public void update(String uid, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.put("user/"+uid, params, responseHandler);
     }
+    public void update(String uid, JSONObject params, AsyncHttpResponseHandler responseHandler) {
+        client.put("user/"+uid, params, responseHandler);
+    }
 }

@@ -25,19 +25,30 @@ public class ServicesClient {
     public static AsyncHttpClient client = new AsyncHttpClient();
 
     public ServicesClient(String server, String base) {
+        client.setTimeout(60000);
         this.url = server + '/' + base + '/';
         this.rootUrl = server + '/';
         this.token = "";
         this.sessionId = "";
         this.sessionName = "";
-        client.setTimeout(60000);
+        this.getToken();
     }
 
-    public String getToken() {
-        return token;
+    public void getToken() {
+        getToken(new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                String result = new String(bytes);
+                setToken(result);
+            }
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                setToken("");
+            }
+        });
     }
     public void getToken(AsyncHttpResponseHandler responseHandler) {
-        this.getRoot("services/session/token", new RequestParams(), responseHandler);
+        client.get(getAbsoluteUrl(this.url + "services/session/token"), new RequestParams(), responseHandler);
     }
     public void setToken(String token) {
         this.token = token;
@@ -62,19 +73,7 @@ public class ServicesClient {
         if (!token.isEmpty()) {
             client.addHeader("X-CSRF-Token", token);
         } else {
-            /*
-            getToken(new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                    String result = new String(bytes);
-                    setToken(result);
-                }
-                @Override
-                public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                    token = "";
-                }
-            });
-            */
+            this.getToken();
         }
         // session
         if (!sessionId.isEmpty() && !sessionName.isEmpty()) {
@@ -113,7 +112,7 @@ public class ServicesClient {
         this.setHeaders();
         StringEntity se;
         try {
-            se = new StringEntity(params.toString(), StandardCharsets.UTF_8);
+            se = new StringEntity(params.toString(), HTTP.UTF_8);
             se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, getAbsoluteUrl(url), se, "application/json", responseHandler);
         } catch (Exception e) {

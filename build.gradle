@@ -79,8 +79,8 @@ android {
         */
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
-     }
-    buildToolsVersion '27.0.3'
+    }
+    buildToolsVersion '28.0.2'
 }
 repositories {
     google()

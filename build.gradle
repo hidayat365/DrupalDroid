@@ -43,10 +43,10 @@ dependencies {
  * compilation target.
  */
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -80,7 +80,6 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
-    buildToolsVersion '28.0.2'
 }
 repositories {
     google()

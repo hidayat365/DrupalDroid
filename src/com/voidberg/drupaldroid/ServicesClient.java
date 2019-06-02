@@ -10,6 +10,8 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -38,8 +40,13 @@ public class ServicesClient {
         getToken(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                String result = new String(bytes);
-                setToken(result);
+                try {
+                    String result = new String(bytes);
+                    JSONObject json = new JSONObject(result);
+                    setToken(json.getString("token"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
@@ -48,7 +55,7 @@ public class ServicesClient {
         });
     }
     public void getToken(AsyncHttpResponseHandler responseHandler) {
-        client.get(getAbsoluteUrl(this.url + "services/session/token"), new RequestParams(), responseHandler);
+        client.post(getAbsoluteUrl("user/token"), new RequestParams(), responseHandler);
     }
     public void setToken(String token) {
         this.token = token;
@@ -71,6 +78,7 @@ public class ServicesClient {
     private void setHeaders() {
         // token
         if (!token.isEmpty()) {
+            client.addHeader("Content-Type", "application/json");
             client.addHeader("X-CSRF-Token", token);
         } else {
             this.getToken();

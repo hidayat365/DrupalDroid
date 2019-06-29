@@ -1,10 +1,10 @@
 package com.voidberg.drupaldroid;
 
-import android.util.Log;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
+import com.voidberg.drupaldroid.http.MyRedirectHandler;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -13,8 +13,6 @@ import cz.msebera.android.httpclient.protocol.HTTP;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 public class ServicesClient {
     private String url;
@@ -28,6 +26,8 @@ public class ServicesClient {
 
     public ServicesClient(String server, String base) {
         client.setTimeout(60000);
+        client.setEnableRedirects(true,true);
+        client.setRedirectHandler(new MyRedirectHandler(true));
         this.url = server + '/' + base + '/';
         this.rootUrl = server + '/';
         this.token = "";

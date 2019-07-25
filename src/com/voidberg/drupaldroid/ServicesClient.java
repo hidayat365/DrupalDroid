@@ -5,6 +5,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.voidberg.drupaldroid.http.MyRedirectHandler;
+import com.voidberg.drupaldroid.http.MySSLSocketFactory;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -13,6 +14,11 @@ import cz.msebera.android.httpclient.protocol.HTTP;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
 
 public class ServicesClient {
     private String url;
@@ -28,6 +34,17 @@ public class ServicesClient {
         client.setTimeout(60000);
         client.setEnableRedirects(true,true);
         client.setRedirectHandler(new MyRedirectHandler(true));
+//        try {
+//            client.setSSLSocketFactory(new MySSLSocketFactory());
+//        } catch (UnrecoverableKeyException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (KeyStoreException e) {
+//            e.printStackTrace();
+//        } catch (KeyManagementException e) {
+//            e.printStackTrace();
+//        }
         this.url = server + '/' + base + '/';
         this.rootUrl = server + '/';
         this.token = "";

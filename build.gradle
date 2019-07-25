@@ -52,7 +52,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-
     /**
     * This nested sourceSets block points the source code directories to the
     * existing folders in the project, instead of using the default new

@@ -32,7 +32,6 @@ import java.net.URI;
 import cz.msebera.android.httpclient.HttpRequest;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.ProtocolException;
-import cz.msebera.android.httpclient.annotation.Immutable;
 import cz.msebera.android.httpclient.client.RedirectHandler;
 import cz.msebera.android.httpclient.client.RedirectStrategy;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
@@ -41,7 +40,6 @@ import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.client.methods.HttpUriRequest;
 import cz.msebera.android.httpclient.protocol.HttpContext;
 
-@Immutable
 public class MyRedirectStrategy implements RedirectStrategy {
 
     private final RedirectHandler handler;

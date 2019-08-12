@@ -34,7 +34,7 @@ dependencies {
     // Add other library dependencies here (see the next step)
     implementation 'cz.msebera.android:httpclient:4.5.8'
     implementation 'com.loopj.android:android-async-http:1.4.10'
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
 /**
